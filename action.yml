@@ -1,0 +1,94 @@
+# required
+name: 'markdown-safe-link-test'
+author: 'Mark Battistella'
+description: 'Check if the links pass Google Safe Web'
+
+
+# styles
+branding:
+    icon: 'shield'
+    color: 'red'
+
+
+# user inputs
+inputs:
+    directory:
+        description: 'The directory to scan md files'
+        required: true
+        default: '.'
+
+    api:
+        description: 'Your Safe Browsing API key'
+        required: true
+
+    replace:
+        description: 'Text to replace the bad urls with'
+        required: true
+        default: '[REDACTED]'
+
+
+    github_token:
+        description: 'Token for the repo - $\{{ secrets.GITHUB_TOKEN }}'
+        required: true
+
+    author_email:
+        description: 'Email used to configure user.email in `git config`.'
+        required: false
+        default: 'github-actions[bot]@users.noreply.github.com'
+
+    author_name:
+        description: 'Name used to configure user.name in `git config`.'
+        required: false
+        default: 'github-actions[bot]'
+
+    message:
+        description: 'Commit message.'
+        required: false
+
+    repository:
+        description: 'Repository name to push. Default is current repository'
+        required: false
+        default: ''
+
+    branch:
+        description: 'Destination branch to push changes'
+        required: false
+        default: 'main'
+
+    empty:
+        description: 'Allow empty commit'
+        required: false
+
+    force:
+        description: 'Determines if force push is used'
+        required: false
+
+    tags:
+        description: 'Determines if --tags is used'
+        required: false
+
+    commit_directory:
+        description: 'Directory to change to before pushing.'
+        required: false
+        default: '.'
+
+
+# for Docker
+runs:
+    using: 'docker'
+    image: 'Dockerfile'
+    args:
+        - ${{ inputs.directory }}
+        - ${{ inputs.api }}
+        - ${{ inputs.replace }}
+
+        - ${{ inputs.github_token }}
+        - ${{ inputs.author_email }}
+        - ${{ inputs.author_name }}
+        - ${{ inputs.message }}
+        - ${{ inputs.repository }}
+        - ${{ inputs.branch }}
+        - ${{ inputs.empty }}
+        - ${{ inputs.force }}
+        - ${{ inputs.tags }}
+        - ${{ inputs.commit_directory }}

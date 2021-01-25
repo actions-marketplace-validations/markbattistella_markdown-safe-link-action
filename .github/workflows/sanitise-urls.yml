@@ -1,0 +1,39 @@
+# title of workflow
+name: Markdown URL Sanitiser
+
+# when to trigger
+on:
+  push:
+    paths:
+      - '**.md'
+
+# what to run
+jobs:
+
+  # job #1
+  markdown-safe-link:
+    name: markdown-safe-link
+    runs-on: ubuntu-latest
+    steps:
+
+      # checkout the repoistory
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # sanitise the urls
+      - name: Markdown Safe Link Sanitisation
+        uses: ./
+        id: sanitise
+        with:
+          directory:  "."
+          api: ${{ secrets.GOOGLE_API }}
+          replace: "~~UNSAFE_URL~~"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          author_email:
+#          author_name:
+#          message:
+#          branch:
+#          empty:
+#          force:
+#          tags:
+#          commit_directory:
