@@ -2,19 +2,19 @@
 
 ## Inline
 
-- http://malware.wicar.org/data/eicar.com
-- http://malware.wicar.org/data/ms14_064_ole_xp.html
-- http://malware.wicar.org/data/ms14_064_ole_not_xp.html
-- http://malware.wicar.org/data/ms09_002_memory_corruption.html
-- http://malware.wicar.org/data/ms09_072_style_object.html
-- http://malware.wicar.org/data/ms10_090_ie_css_clip_ie6.html
-- http://malware.wicar.org/data/firefox_proto_crmfrequest.html
+- ~~UNSAFE_URL~~
+- ~~UNSAFE_URL~~
+- ~~UNSAFE_URL~~
+- ~~UNSAFE_URL~~
+- ~~UNSAFE_URL~~
+- ~~UNSAFE_URL~~
+- ~~UNSAFE_URL~~
 
 ## Formatted
 
-- [http://malware.wicar.org/data/java_jre17_exec.html](http://malware.wicar.org/data/java_jre17_exec.html)
-- [http://malware.wicar.org/data/ms03_020_ie_objecttype.html](http://malware.wicar.org/data/ms03_020_ie_objecttype.html)
-- [http://malware.wicar.org/data/ms05_054_onload.html](http://malware.wicar.org/data/ms05_054_onload.html)
-- [http://malware.wicar.org/data/vlc_amv.html](http://malware.wicar.org/data/vlc_amv.html)
-- [http://malware.wicar.org/data/adobe_flash_hacking_team_uaf.html](http://malware.wicar.org/data/adobe_flash_hacking_team_uaf.html)
-- [http://malware.wicar.org/data/js_crypto_miner.html](http://malware.wicar.org/data/js_crypto_miner.html)
+- [~~UNSAFE_URL~~](~~UNSAFE_URL~~)
+- [~~UNSAFE_URL~~](~~UNSAFE_URL~~)
+- [~~UNSAFE_URL~~](~~UNSAFE_URL~~)
+- [~~UNSAFE_URL~~](~~UNSAFE_URL~~)
+- [~~UNSAFE_URL~~](~~UNSAFE_URL~~)
+- [~~UNSAFE_URL~~](~~UNSAFE_URL~~)
