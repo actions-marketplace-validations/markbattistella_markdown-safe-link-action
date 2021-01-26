@@ -1,0 +1,8 @@
+# Markdown Safe Link - Github Action
+# 2021.01
+
+# default owners for everything in the repo
+*       @markbattistella
+
+# original *.bash iteration
+*.bash    @georgeman93
