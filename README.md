@@ -88,7 +88,40 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+#### Full use
+
+```yaml
+name: Markdown URL Sanitiser
+on:
+  [push]
+jobs:
+  markdown-safe-link:
+    name: markdown-safe-link
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Markdown Safe Link Sanitisation
+        uses: markbattistella/markdown-safe-links-action@v1.0.0
+        id: sanitise
+        with:
+          directory:  "."
+          api: ${{ secrets.GOOGLE_API }}
+          replace: "~~UNSAFE_URL~~"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          author_email: "my.email@domain.ltd"
+          author_name: "My Name"
+          message: "Sanitised message - not default"
+          branch: "master" # if your branch hasn't changed to `main`
+          empty: true
+          force: true
+          tags: true
+          commit_directory: "./docs"
+```
+
 #### On CRON schedule
+
+This is perfect if you want it to scan on an interval if you don't commit frequently.
 
 ```yaml
 name: Markdown URL Sanitiser
@@ -114,7 +147,7 @@ jobs:
 
 #### Locally
 
-You can use the `node` module from [markbattistella/markdown-safe-link](https://github.com/markbattistella/markdown-safe-link) or from npm [@markbattistella/markdown-safe-link](https://www.npmjs.com/package/@markbattistella/markdown-safe-link).
+You can use the `node` module from [Github](https://github.com/markbattistella/markdown-safe-link) or from [npm](https://www.npmjs.com/package/@markbattistella/markdown-safe-link).
 
 Installing it for the command line:
 
