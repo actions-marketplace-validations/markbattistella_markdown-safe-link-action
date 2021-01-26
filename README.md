@@ -1,3 +1,5 @@
+<div align="center">
+
 # Markdown URL sanitiser - Github Action
 
 ![Markdown URL Sanitiser](https://github.com/markbattistella/markdown-safe-link-action/workflows/Markdown%20URL%20Sanitiser/badge.svg?branch=main)
@@ -5,6 +7,8 @@
 [![Help donate](https://img.shields.io/badge/%20-@markbattistella-blue?logo=paypal)](https://www.paypal.me/markbattistella/6AUD) [![Buy me a coffee](https://img.shields.io/badge/%20-buymeacoffee-black?logo=buy-me-a-coffee)](https://www.buymeacoffee.com/markbattistella)
 
 ---
+
+</div>
 
 Search and replace any unsafe urls in your repos using the Google Safe Browsing API
 
@@ -26,7 +30,7 @@ I realised there isn't anything out there to prevent this from happening to anyo
 
     ```yaml
     # You can change this to use a specific version
-    - uses: markbattistella/markdown-safe-links@v1
+    - uses: markbattistella/markdown-safe-links-action@v1
       with:
 
         # scope of markdown files (required)
@@ -75,7 +79,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Markdown Safe Link Sanitisation
-        uses: markbattistella/markdown-safe-links@v1
+        uses: markbattistella/markdown-safe-links-action@v1.0.0
         id: sanitise
         with:
           directory:  "."
@@ -99,11 +103,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Markdown Safe Link Sanitisation
-        uses: markbattistella/markdown-safe-links@v1
+        uses: markbattistella/markdown-safe-links-action@v1.0.0
         id: sanitise
         with:
           directory:  "."
           api: ${{ secrets.GOOGLE_API }}
           replace: "~~UNSAFE_URL~~"
           github_token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+#### Locally
+
+You can use the `node` module from [markbattistella/markdown-safe-link](https://github.com/markbattistella/markdown-safe-link) or from npm [@markbattistella/markdown-safe-link](https://www.npmjs.com/package/@markbattistella/markdown-safe-link).
+
+Installing it for the command line:
+
+```sh
+# locally
+npm i @markbattistella/markdown-safe-link
+
+# globally
+npm i @markbattistella/markdown-safe-link -g
 ```
