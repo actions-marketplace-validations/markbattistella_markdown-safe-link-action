@@ -3,9 +3,8 @@ name: Markdown URL Sanitiser
 
 # when to trigger
 on:
-  push:
-    paths:
-      - '**.md'
+  release:
+    types: [published]
 
 # what to run
 jobs:
