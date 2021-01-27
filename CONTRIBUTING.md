@@ -2,15 +2,15 @@
 
 A big welcome and thank you for considering contributing to open source projects! It’s people like you that make it a reality for users in our community.
 
-Reading and following these guidelines will help us make the contribution process easy and effective for everyone involved. It also communicates that you agree to respect the time of the developers managing and developing these open source projects. In return, we will reciprocate that respect by addressing your issue, assessing changes, and helping you finalize your pull requests.
+Reading and following these guidelines will help us make the contribution process easy and effective for everyone involved. It also communicates that you agree to respect the time of the developers managing and developing these open source projects. In return, we will reciprocate that respect by addressing your issue, assessing changes, and helping you finalise your pull requests.
 
 ## Quicklinks
 
-* [Code of Conduct](#code-of-conduct)
-* [Getting Started](#getting-started)
-    * [Issues](#issues)
-    * [Pull Requests](#pull-requests)
-* [Getting Help](#getting-help)
+- [Code of Conduct](#code-of-conduct)
+- [Getting Started](#getting-started)
+  - [Issues](#issues)
+  - [Pull Requests](#pull-requests)
+- [Getting Help](#getting-help)
 
 ## Code of Conduct
 
@@ -45,12 +45,12 @@ For changes that address core functionality or would require breaking changes (e
 In general;
 
 1. Fork the repository to your own Github account
-2. Clone the project to your machine
-3. Create a branch locally with a succinct but descriptive name
-4. Commit changes to the branch
-5. Following any formatting and testing guidelines specific to this repo
-6. Push changes to your fork
-7. Open a PR in our repository and follow the PR template so that we can efficiently review the changes.
+1. Clone the project to your machine
+1. Create a branch locally with a succinct but descriptive name
+1. Commit changes to the branch
+1. Following any formatting and testing guidelines specific to this repo
+1. Push changes to your fork
+1. Open a PR in our repository and follow the PR template so that we can efficiently review the changes.
 
 ## Getting Help
 

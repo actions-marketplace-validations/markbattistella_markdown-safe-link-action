@@ -60,8 +60,6 @@ I realised there isn't anything out there to prevent this from happening to anyo
 | `branch`           | `string`  |          | `main`                        | Destination branch to push changes    |
 | `empty`            | `boolean` |          | `false`                       | Allow empty commits                   |
 | `force`            | `boolean` |          | `false`                       | Determines if force push is used      |
-| `tags`             | `boolean` |          | `false`                       | Determines if `--tags` is used        |
-| `commit_directory` | `string`  |          | `'.'`                         | Directory to change to before pushing |
 
 ### Examples
 
@@ -115,8 +113,6 @@ jobs:
           branch: "master" # if your branch hasn't changed to `main`
           empty: true
           force: true
-          tags: true
-          commit_directory: "./docs"
 ```
 
 #### On CRON schedule

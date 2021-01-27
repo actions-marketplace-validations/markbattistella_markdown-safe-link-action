@@ -39,42 +39,24 @@ TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
 
 # info: command line arguments
-MDSL_DIR="${1}"
-MDSL_API="${2}"
-MDSL_RPL="${3}"
-
+INPUT_DIRECTORY=${INPUT_DIRECTORY:-'.'}
+INPUT_API=${INPUT_API}
+INPUT_REPLACE=${INPUT_REPLACE:-'~~REDACTED~~'}
 INPUT_AUTHOR_EMAIL=${INPUT_AUTHOR_EMAIL:-'github-actions[bot]@users.noreply.github.com'}
 INPUT_AUTHOR_NAME=${INPUT_AUTHOR_NAME:-'github-actions[bot]'}
 INPUT_MESSAGE=${INPUT_MESSAGE:-"Sanitised URLs via Google Safe Browsing API on ${TIMESTAMP}"}
 INPUT_BRANCH=${INPUT_BRANCH:-main}
-INPUT_FORCE=${INPUT_FORCE:-false}
-INPUT_TAGS=${INPUT_TAGS:-false}
 INPUT_EMPTY=${INPUT_EMPTY:-false}
-INPUT_DIRECTORY=${INPUT_DIRECTORY:-'.'}
+INPUT_FORCE=${INPUT_FORCE:-false}
 
-
-# info: check the settings are set
-# --> directory
-if [ -z "${MDSL_DIR}" ]; then
-	MDSL_DIR="."
-else
-	MDSL_DIR="${MDSL_DIR}"
-fi
 
 # --> api key
-if [ -z "${MDSL_API}" ]; then
+if [ -z "${INPUT_API}" ]; then
 	echo -e "${RED}No API key specified. Exiting.${CLR}"
 	echo -e "Please visit Google API for a key (https://developers.google.com/safe-browsing/)"
 	exit 1
 else
-	MDSL_DIR="${MDSL_DIR}"
-fi
-
-# --> replacement text
-if [ -z "${MDSL_RPL}" ]; then
-	MDSL_RPL="~~REDACTED~~"
-else
-	MDSL_RPL="${MDSL_RPL}"
+	INPUT_DIRECTORY="${INPUT_DIRECTORY}"
 fi
 
 
@@ -83,15 +65,15 @@ npm i -g @markbattistella/markdown-safe-link
 
 
 # debug: log the directory and the replacement text
-echo -e "${BLU}SEARCH DIRECTORY:${CLR}  ${MDSL_DIR}"
-echo -e "${BLU}REPLACE URLS WITH:${CLR} ${MDSL_RPL}"
+echo -e "${BLU}SEARCH DIRECTORY:${CLR}  ${INPUT_DIRECTORY}"
+echo -e "${BLU}REPLACE URLS WITH:${CLR} ${INPUT_REPLACE}"
 
 
 # run it
 markdown-safe-link \
-	--dir="${MDSL_DIR}" \
-	--api="${MDSL_API}" \
-	--replace="${MDSL_RPL}"
+	--dir="${INPUT_DIRECTORY}" \
+	--api="${INPUT_API}" \
+	--replace="${INPUT_REPLACE}"
 
 
 # git: where we will push to
@@ -113,11 +95,6 @@ if [ ${INPUT_FORCE} ]; then
     _FORCE_OPTION='--force'
 fi
 
-# git: add tags
-if [ ${INPUT_TAGS} ]; then
-    _TAGS='--tags'
-fi
-
 # git: go to directory
 cd "${INPUT_DIRECTORY}"
 
@@ -129,7 +106,7 @@ git config http.sslVerify false
 
 # git: set the user and email for commit
 git config --local user.email "${INPUT_AUTHOR_EMAIL}"
-git config --local user.name "${INPUT_AUTHOR_NAME}"
+git config --local user.name  "${INPUT_AUTHOR_NAME}"
 
 # git: add ALL changes
 git add -A
@@ -138,4 +115,4 @@ git add -A
 git commit -m "{$INPUT_MESSAGE}" $_EMPTY || exit 0
 
 # git: push to remote
-git push "${REMOTE_REPOSITORY}" HEAD:"${INPUT_BRANCH}" --follow-tags $_FORCE_OPTION $_TAGS;
+git push "${REMOTE_REPOSITORY}" HEAD:"${INPUT_BRANCH}" --follow-tags $_FORCE_OPTION;

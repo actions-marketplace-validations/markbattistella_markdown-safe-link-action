@@ -1,14 +1,12 @@
 # required
-name: 'markdown-safe-link-test'
+name: 'markdown-safe-link-action'
 author: 'Mark Battistella'
 description: 'Check if the links pass Google Safe Web'
-
 
 # styles
 branding:
     icon: 'shield'
     color: 'red'
-
 
 # user inputs
 inputs:
@@ -25,7 +23,6 @@ inputs:
         description: 'Text to replace the bad urls with'
         required: true
         default: '[REDACTED]'
-
 
     github_token:
         description: 'Token for the repo - $\{{ secrets.GITHUB_TOKEN }}'
@@ -45,11 +42,6 @@ inputs:
         description: 'Commit message.'
         required: false
 
-    repository:
-        description: 'Repository name to push. Default is current repository'
-        required: false
-        default: ''
-
     branch:
         description: 'Destination branch to push changes'
         required: false
@@ -58,19 +50,12 @@ inputs:
     empty:
         description: 'Allow empty commit'
         required: false
+        default: false
 
     force:
         description: 'Determines if force push is used'
         required: false
-
-    tags:
-        description: 'Determines if --tags is used'
-        required: false
-
-    commit_directory:
-        description: 'Directory to change to before pushing.'
-        required: false
-        default: '.'
+        default: false
 
 
 # for Docker
@@ -81,14 +66,10 @@ runs:
         - ${{ inputs.directory }}
         - ${{ inputs.api }}
         - ${{ inputs.replace }}
-
         - ${{ inputs.github_token }}
         - ${{ inputs.author_email }}
         - ${{ inputs.author_name }}
         - ${{ inputs.message }}
-        - ${{ inputs.repository }}
         - ${{ inputs.branch }}
         - ${{ inputs.empty }}
         - ${{ inputs.force }}
-        - ${{ inputs.tags }}
-        - ${{ inputs.commit_directory }}
