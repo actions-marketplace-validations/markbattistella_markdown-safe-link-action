@@ -4,8 +4,8 @@
 
 | Item               | Version | Supported          |
 | ------------------ | ------- | ------------------ |
-| markdown-safe-link | 1.0.5   | :white_check_mark: |
-| markdown-safe-link | < 1.0.5 | :x:                |
+| markdown-safe-link | 1.0.9   | :white_check_mark: |
+| markdown-safe-link | < 1.0.9 | :x:                |
 
 ## Reporting a Vulnerability
 

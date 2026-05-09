@@ -19,11 +19,11 @@
 
 
 # info: exit if error
-set -eu
+set -euo pipefail
 # "set -e" short for "set -o errexit"
 # --> that is, abort the script if a command returns with a non-zero exit code
 # "set -u" short for "set -o nounset"
-# --> that is, abort the script if a variable name is dereferenced when the variable hasn't been set
+# "set -o pipefail" makes pipeline failures visible
 
 
 # info: set up colours
@@ -40,7 +40,7 @@ TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
 # info: command line arguments
 INPUT_DIRECTORY=${INPUT_DIRECTORY:-'.'}
-INPUT_API=${INPUT_API}
+INPUT_API=${INPUT_API:-}
 INPUT_REPLACE=${INPUT_REPLACE:-'~~REDACTED~~'}
 INPUT_AUTHOR_EMAIL=${INPUT_AUTHOR_EMAIL:-'github-actions[bot]@users.noreply.github.com'}
 INPUT_AUTHOR_NAME=${INPUT_AUTHOR_NAME:-'github-actions[bot]'}
@@ -48,6 +48,7 @@ INPUT_MESSAGE=${INPUT_MESSAGE:-"Sanitised URLs via Google Safe Browsing API on $
 INPUT_BRANCH=${INPUT_BRANCH:-main}
 INPUT_EMPTY=${INPUT_EMPTY:-false}
 INPUT_FORCE=${INPUT_FORCE:-false}
+INPUT_GITHUB_TOKEN=${INPUT_GITHUB_TOKEN:-}
 
 
 # --> api key
@@ -58,11 +59,6 @@ if [ -z "${INPUT_API}" ]; then
 else
 	INPUT_DIRECTORY="${INPUT_DIRECTORY}"
 fi
-
-
-# info: install npm module (globally)
-npm i -g @markbattistella/markdown-safe-link
-
 
 # debug: log the directory and the replacement text
 echo -e "${BLU}SEARCH DIRECTORY:${CLR}  ${INPUT_DIRECTORY}"
@@ -86,23 +82,23 @@ if [ -z "${INPUT_GITHUB_TOKEN}" ]; then
 fi
 
 # git: are we passing an empty commit
-if [ ${INPUT_EMPTY} ]; then
-    _EMPTY='--allow-empty'
+_EMPTY=()
+if [ "${INPUT_EMPTY}" = "true" ]; then
+    _EMPTY=(--allow-empty)
 fi
 
 # git: force commit
-if [ ${INPUT_FORCE} ]; then
-    _FORCE_OPTION='--force'
+_FORCE_OPTION=()
+if [ "${INPUT_FORCE}" = "true" ]; then
+    _FORCE_OPTION=(--force-with-lease)
 fi
+
 
 # git: go to directory
 cd "${INPUT_DIRECTORY}"
 
 # git: set remote repository
-REMOTE_REPOSITORY="https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-
-# git: SSL verification not needed
-git config http.sslVerify false
+REMOTE_REPOSITORY="https://x-access-token:${INPUT_GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
 
 # git: set the user and email for commit
 git config --local user.email "${INPUT_AUTHOR_EMAIL}"
@@ -112,7 +108,7 @@ git config --local user.name  "${INPUT_AUTHOR_NAME}"
 git add -A
 
 # git: commit with a message
-git commit -m "{$INPUT_MESSAGE}" $_EMPTY || exit 0
+git commit -m "${INPUT_MESSAGE}" "${_EMPTY[@]}" || exit 0
 
 # git: push to remote
-git push "${REMOTE_REPOSITORY}" HEAD:"${INPUT_BRANCH}" --follow-tags $_FORCE_OPTION;
+git push "${REMOTE_REPOSITORY}" "HEAD:${INPUT_BRANCH}" --follow-tags "${_FORCE_OPTION[@]}"

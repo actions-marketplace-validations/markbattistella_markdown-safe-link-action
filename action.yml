@@ -25,7 +25,7 @@ inputs:
         default: '[REDACTED]'
 
     github_token:
-        description: 'Token for the repo - $\{{ secrets.GITHUB_TOKEN }}'
+        description: 'Token for the repo, usually ${{ secrets.GITHUB_TOKEN }}'
         required: true
 
     author_email:
@@ -50,12 +50,12 @@ inputs:
     empty:
         description: 'Allow empty commit'
         required: false
-        default: false
+        default: 'false'
 
     force:
         description: 'Determines if force push is used'
         required: false
-        default: false
+        default: 'false'
 
 
 # for Docker

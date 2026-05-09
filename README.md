@@ -1,10 +1,10 @@
 <div align="center">
 
-# Markdown URL sanitiser - Github Action
+# Markdown URL sanitiser - GitHub Action
 
 ![Markdown URL Sanitiser](https://github.com/markbattistella/markdown-safe-link-action/workflows/Markdown%20URL%20Sanitiser/badge.svg?branch=main)
 
-[![Help donate](https://img.shields.io/badge/%20-@markbattistella-blue?logo=paypal)](https://www.paypal.me/markbattistella/6AUD) [![Buy me a coffee](https://img.shields.io/badge/%20-buymeacoffee-black?logo=buy-me-a-coffee)](https://www.buymeacoffee.com/markbattistella)
+[![Help donate](https://img.shields.io/badge/%20-@markbattistella-blue?logo=paypal)](https://www.paypal.me/markbattistella/6AUD)
 
 ---
 
@@ -22,7 +22,7 @@ I realised there isn't anything out there to prevent this from happening to anyo
 
 ## Usage
 
-### Github Action
+### GitHub Action
 
 1. Get an API for [Google Safe Browsing](https://developers.google.com/safe-browsing/)
 
@@ -30,7 +30,7 @@ I realised there isn't anything out there to prevent this from happening to anyo
 
     ```yaml
     # You can change this to use a specific version
-    - uses: markbattistella/markdown-safe-links-action@v1
+    - uses: markbattistella/markdown-safe-link-action@v1.0.9
       with:
 
         # scope of markdown files (required)
@@ -42,7 +42,7 @@ I realised there isn't anything out there to prevent this from happening to anyo
         # replace malicious urls text (required)
         replace: "~~UNSAFE_URL~~"
 
-        # Github token (required)
+        # GitHub token (required)
         github_token: ${{ secrets.GITHUB_TOKEN }}
     ```
 
@@ -54,8 +54,8 @@ I realised there isn't anything out there to prevent this from happening to anyo
 | `api`              | `string`  | Y        | nil                           | Google API for scanning URLs          |
 | `replace`          | `string`  | Y        | `~~UNSAFE_URL~~`              | What to replace the URLs with         |
 | `github_token`     | `string`  | Y        | `${{ secrets.GITHUB_TOKEN }}` | Token for the repository              |
-| `author_email`     | `string`  |          | Github bot email              | Email for commit                      |
-| `author_name`      | `string`  |          | Github Bot                    | Name for commit                       |
+| `author_email`     | `string`  |          | GitHub bot email              | Email for commit                      |
+| `author_name`      | `string`  |          | GitHub Bot                    | Name for commit                       |
 | `message`          | `string`  |          | Sanitised URLs on DATE        | Message for commit                    |
 | `branch`           | `string`  |          | `main`                        | Destination branch to push changes    |
 | `empty`            | `boolean` |          | `false`                       | Allow empty commits                   |
@@ -75,9 +75,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Markdown Safe Link Sanitisation
-        uses: markbattistella/markdown-safe-links-action@v1.0.0
+        uses: markbattistella/markdown-safe-link-action@v1.0.9
         id: sanitise
         with:
           directory:  "."
@@ -98,9 +98,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Markdown Safe Link Sanitisation
-        uses: markbattistella/markdown-safe-links-action@v1.0.0
+        uses: markbattistella/markdown-safe-link-action@v1.0.9
         id: sanitise
         with:
           directory:  "."
@@ -130,9 +130,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Markdown Safe Link Sanitisation
-        uses: markbattistella/markdown-safe-links-action@v1.0.0
+        uses: markbattistella/markdown-safe-link-action@v1.0.9
         id: sanitise
         with:
           directory:  "."
@@ -143,7 +143,7 @@ jobs:
 
 #### Locally
 
-You can use the `node` module from [Github](https://github.com/markbattistella/markdown-safe-link) or from [npm](https://www.npmjs.com/package/@markbattistella/markdown-safe-link).
+You can use the `node` module from [GitHub](https://github.com/markbattistella/markdown-safe-link) or from [npm](https://www.npmjs.com/package/@markbattistella/markdown-safe-link).
 
 Installing it for the command line:
 
